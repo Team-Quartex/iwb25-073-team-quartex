@@ -8,7 +8,7 @@ export default function AddAdminModal({ show, onClose, onAdd }) {
   e.preventDefault();
 
   try {
-    const res = await fetch("http://localhost:9090/admin/addAdmin", {
+    const res = await fetch("http://localhost:9090/api/admin/auth/addAdmin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form)
