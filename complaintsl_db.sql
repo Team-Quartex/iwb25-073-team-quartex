@@ -111,7 +111,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userId`, `name`, `nic`, `email`, `password`) VALUES
-(1, 'hansaka', '200209801097', 'hansakaravi02@gmail.com', 'rasaja12345');
+(1, 'hansaka', '200209801097', 'hansakaravi02@gmail.com', '12345');
 
 --
 -- Indexes for dumped tables
