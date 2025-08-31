@@ -1,14 +1,22 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     setUser(loggedInUser ? JSON.parse(loggedInUser) : null);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user"); // Clear user session
+    setUser(null);
+    router.push("/"); // Redirect to landing page (or "/login")
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-blue-700 text-white px-6 py-4 flex justify-between items-center shadow-md">
@@ -28,6 +36,12 @@ export default function Navbar() {
           >
             + New
           </Link>
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition"
+          >
+            Logout
+          </button>
         </div>
       )}
     </header>

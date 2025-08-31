@@ -1,11 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import AddAdminModal from "./add/AddAdminModal";
+import { useRouter } from "next/navigation";
 
 export default function AdminNavbar() {
   const [admins, setAdmins] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     // Fetch admins from your Ballerina backend
@@ -28,6 +30,10 @@ export default function AdminNavbar() {
     setAdmins(updated);
     localStorage.setItem("admins", JSON.stringify(updated));
   };
+  const handleLogout = () => {
+    localStorage.removeItem("user"); // Clear user session
+    router.push("/"); // Redirect to landing page (or "/login")
+  };
 
   const deleteAdmin = (id) => {
     const updated = admins.filter((a) => a.id !== id);
@@ -52,6 +58,12 @@ export default function AdminNavbar() {
             className="bg-gray-700 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-600 transition"
           >
             View Admins
+          </button>
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition"
+          >
+            Logout
           </button>
         </div>
       </header>
